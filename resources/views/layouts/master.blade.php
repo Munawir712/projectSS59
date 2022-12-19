@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>Blank Page</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
   <!-- Font Awesome -->
   {{-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css"> --}}
-  <link rel="stylesheet" href="../../vendor/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{ asset('../../vendor/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset('../../dist/css/adminlte.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -28,6 +28,13 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+        </form>
       </li>
     </ul>
 
@@ -167,7 +174,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('../../dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -898,13 +905,13 @@
 
 <!-- jQuery -->
 {{-- <script src="../../plugins/jquery/jquery.min.js"></script> --}}
-<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="{{ asset('../../vendor/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 {{-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('../../vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{ asset('../../dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="{{ asset('../../dist/js/demo.js') }}"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ class PenyewaController extends Controller
      */
     public function index()
     {
-        $penyewa = User::where('roles', 'penyewa');
+        $penyewa = User::where('roles', 'USER')->get();
         return view("penyewa.index", ['penyewa' => $penyewa]);
     }
 
@@ -36,7 +36,17 @@ class PenyewaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $penyewa = new User;
+        $penyewa->name = $request->name;
+        $penyewa->email = $request->email;
+        // $penyewa->phoneNumber = $request->phoneNumber;
+        $penyewa->jenis_kelamin = $request->jenis_kelamin;
+        $penyewa->password = "password";
+        $penyewa->foto_ktp ="";
+        $penyewa->save();
+
+        return redirect('penyewa')->with("message", "Tambah Berhasil");
     }
 
     /**

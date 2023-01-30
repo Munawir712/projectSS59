@@ -64,7 +64,7 @@
                         </td>
                       </tr>
                     @empty
-                        No Data
+                        No
                     @endforelse
                   
                 </tbody>

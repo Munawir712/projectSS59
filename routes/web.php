@@ -25,5 +25,5 @@ Auth::routes();
 
 Route::middleware('auth')->group(function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/home', [PenyewaController::class, 'index'])->name('penyewa');
+    Route::get('/penyewa', [PenyewaController::class, 'index'])->name('penyewa');
 });

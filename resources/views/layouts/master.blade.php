@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Blank Page</title>
+  <title>@yield('title')</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
@@ -24,7 +24,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -207,7 +207,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="penyewa" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Penyewa
@@ -215,7 +215,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="kamarkos" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Kamar Kos
@@ -223,7 +223,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="penyewaan" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Transaksi Penyewaan
@@ -239,7 +239,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    {{-- <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -254,11 +254,12 @@
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>
-
+    </section> --}}
+    @yield('conten-header')
+    @yield('conten-body')
     <!-- Main content -->
-    <section class="content">
-
+    {{-- <section class="content">
+      
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
@@ -284,7 +285,7 @@
       </div>
       <!-- /.card -->
 
-    </section>
+    </section> --}}
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

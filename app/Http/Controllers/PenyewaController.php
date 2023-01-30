@@ -13,7 +13,7 @@ class PenyewaController extends Controller
      */
     public function index()
     {
-        //
+        return view("penyewa.index");
     }
 
     /**

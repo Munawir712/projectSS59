@@ -26,19 +26,49 @@
     <section class="content">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Title</h3>
-
-          <div class="card-tools">
+            <a href="/penyewa/create" class="btn btn-primary">Tambah Data</a>
+            <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
+                <i class="fas fa-minus"></i>
             </button>
             <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
+                <i class="fas fa-times"></i>
             </button>
-          </div>
+            </div>
         </div>
         <div class="card-body">
-          Start creating your amazing application!
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">No Hp</th>
+                    <th scope="col">Jenis Kelamin</th>
+                    <th scope="col">KTP</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @forelse ($penyewa as $item)
+                    <tr>
+                        <th scope="row">{{1}}</th>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->phoneNumber }}</td>
+                        <td>{{ $item->jenis_kelamin }}</td>
+                        <td><img src="" alt="{{ $item->foto_ktp }}"></td>
+                        <td>
+                            <a href="" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                        </td>
+                      </tr>
+                    @empty
+                        No Data
+                    @endforelse
+                  
+                </tbody>
+              </table>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PenyewaController extends Controller
@@ -13,7 +14,8 @@ class PenyewaController extends Controller
      */
     public function index()
     {
-        return view("penyewa.index");
+        $penyewa = User::where('roles', 'penyewa');
+        return view("penyewa.index", ['penyewa' => $penyewa]);
     }
 
     /**
@@ -23,7 +25,7 @@ class PenyewaController extends Controller
      */
     public function create()
     {
-        //
+        return view("penyewa.create");
     }
 
     /**

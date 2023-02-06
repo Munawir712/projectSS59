@@ -26,7 +26,8 @@ class KamarkosController extends Controller
      */
     public function create()
     {
-        return view('kamarkos.create');
+        $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
+        return view('kamarkos.create', ['tipe_kamar' => $tipe_kamar]);
     }
 
     /**
@@ -37,7 +38,15 @@ class KamarkosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kamarkos = new KamarKos;
+        $kamarkos->no_kamar = $request->no_kamar;
+        $kamarkos->name = $request->name;
+        $kamarkos->tipe = $request->tipe_kamar;
+        $kamarkos->harga = $request->harga;
+        $kamarkos->picturePath = "default.png";
+        $kamarkos->save();
+
+        return redirect('kamarkos')->with('message', 'Data Kamar kos ditambahkan');
     }
 
     /**
@@ -82,6 +91,7 @@ class KamarkosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        KamarKos::destroy($id);
+        return redirect('kamarkos')->with('message', 'Data Kamar kos telah dihapus');
     }
 }

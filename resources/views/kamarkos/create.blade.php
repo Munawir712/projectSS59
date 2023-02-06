@@ -38,28 +38,28 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/penyewa" method="POST" >
+            <form action="/kamarkos" method="POST" >
                 @csrf
                 <div class="mb-3">
                   <label for="nama" class="form-label">No Kamar</label>
-                  <input type="text" class="form-control" name="no_kamar" id="no_kamar" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" value="{{ old('no_kamar') }}" name="no_kamar" id="no_kamar" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                   <label for="nama" class="form-label">Nama</label>
-                  <input type="text" class="form-control" name="name" id="nama" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" value="{{ old('name') }}" name="name" id="nama" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
                     <label>Tipe</label>
-                    <select class="form-control select2" style="width: 100%;">
-                      <option selected="selected">Pilih Tipe</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Washington</option>
+                    <select class="form-control select2" name="tipe_kamar" style="width: 100%;">
+                        <option value="">-- Pilih Tipe --</option>
+                        @foreach ($tipe_kamar as $item)
+                            <option value="{{ $item }}" @selected(old('tipe_kamar'))>{{ $item }}</option>
+                        @endforeach
                     </select>
                   </div>
                 <div class="mb-3">
                   <label for="PhoneNumber" class="form-label">Harga</label>
-                  <input type="number" class="form-control" name="harga" id="harga">
+                  <input type="number" class="form-control" value="{{ old('harga') }}" name="harga" id="harga">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

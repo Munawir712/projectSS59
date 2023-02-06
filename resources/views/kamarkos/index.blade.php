@@ -57,7 +57,7 @@
                           <td>{{ $item->tipe }}</td>
                           <td>{{ $item->harga }}</td>
                           <td>
-                              <a href="penyewa/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+                              <a href="/kamarkos/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                               <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}">
                                 Hapus
                               </button>
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                       <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                      <form action="/penyewa/{{ $item->id }}" method="POST">
+                                      <form action="/kamarkos/{{ $item->id }}" method="POST">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Hapus</button>

@@ -40,9 +40,9 @@ class PenyewaController extends Controller
         $penyewa = new User;
         $penyewa->name = $request->name;
         $penyewa->email = $request->email;
-        // $penyewa->phoneNumber = $request->phoneNumber;
+        $penyewa->phoneNumber = $request->phoneNumber;
         $penyewa->jenis_kelamin = $request->jenis_kelamin;
-        $penyewa->password = "password";
+        $penyewa->password = bcrypt("password");
         $penyewa->foto_ktp ="";
         $penyewa->save();
 
@@ -68,7 +68,9 @@ class PenyewaController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('penyewa.edit', [
+            'penyewa'=> User::find($id),
+        ]);
     }
 
     /**
@@ -80,7 +82,17 @@ class PenyewaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd("Ayook");
+        $penyewa = User::find($id);
+        $penyewa->name = $request->name;
+        $penyewa->email = $request->email;
+        $penyewa->phoneNumber = $request->phoneNumber;
+        $penyewa->jenis_kelamin = $request->jenis_kelamin;
+        $penyewa->password = bcrypt("password");
+        $penyewa->foto_ktp ="";
+        $penyewa->save();
+
+        return redirect('penyewa')->with("message", "Data Berhasil diUbah");
     }
 
     /**

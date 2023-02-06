@@ -52,14 +52,14 @@
                 <tbody>
                     @forelse ($penyewa as $item)
                     <tr>
-                        <th scope="row">{{1}}</th>
+                        <th scope="row">{{$loop->iteration}}</th>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phoneNumber }}</td>
                         <td>{{ $item->jenis_kelamin }}</td>
                         <td><img src="" alt="{{ $item->foto_ktp }}"></td>
                         <td>
-                            <a href="" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="penyewa/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                             <a href="" class="btn btn-sm btn-danger">Hapus</a>
                         </td>
                       </tr>

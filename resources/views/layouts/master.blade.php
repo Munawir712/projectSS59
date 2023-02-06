@@ -199,7 +199,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -207,7 +207,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="penyewa" class="nav-link">
+            <a href="/penyewa" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Penyewa
@@ -215,7 +215,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="kamarkos" class="nav-link">
+            <a href="/kamarkos" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Kamar Kos
@@ -223,7 +223,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="penyewaan" class="nav-link">
+            <a href="/penyewaan" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Transaksi Penyewaan

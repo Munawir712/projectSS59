@@ -13,7 +13,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="penyewa">Penyewa</a></li>
+              <li class="breadcrumb-item"><a href="/penyewa">Penyewa</a></li>
               <li class="breadcrumb-item active">Tambah Data Pemyewa</li>
             </ol>
           </div>
@@ -54,13 +54,15 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Jenis Kelamin</label>
-                    <div class="custom-control custom-radio">
+                    <div class="d-block">
+                      <div class="custom-control custom-radio d-inline">
                         <input class="custom-control-input" type="radio" id="pria" value="pria" name="jenis_kelamin">
                         <label for="pria" class="custom-control-label">Pria</label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-radio d-inline">
                         <input class="custom-control-input" type="radio" id="wanita" value="wanita" name="jenis_kelamin">
                         <label for="wanita" class="custom-control-label">Wanita</label>
+                    </div>
                     </div>
                 </div>
                 <div class="form-group">

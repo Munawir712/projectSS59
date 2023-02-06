@@ -103,6 +103,8 @@ class PenyewaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+        User::destroy($id);
+        return redirect('penyewa')->with("message", "Data penyea sudah dihapus");
     }
 }

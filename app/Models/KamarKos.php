@@ -10,4 +10,9 @@ class KamarKos extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function penyewaan()
+    {
+        return $this->belongsTo(Penyewaan::class);
+    }
 }

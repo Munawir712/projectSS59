@@ -54,7 +54,7 @@
                     @forelse ($penyewaan as $item)
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
-                            <td>{{ $item->no_kamar }}</td>
+                            <td>{{ $item->kamarkos->no_kamar }}</td>
                             <td>{{ $item->penyewa->name }}</td>
                             <td>{{ $item->tanggal_mulai }}</td>
                             <td>{{ $item->tanggal_selesai }}</td>

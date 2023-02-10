@@ -11,4 +11,14 @@ class Penyewaan extends Model
 
     protected $guarded = ['id'];
 
+    public function penyewa() 
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function kamarkos()
+    {
+        return $this->hasOne(KamarKos::class, 'id', 'kamarkos_id');
+    }
+
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KamarKos;
 use App\Models\Penyewaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PenyewaanController extends Controller
@@ -27,7 +29,10 @@ class PenyewaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyewaan.create', [
+            'penyewa' => User::where('roles', 'USER')->get(),
+            'kamarkos' => KamarKos::all(),
+        ]);
     }
 
     /**
@@ -38,7 +43,17 @@ class PenyewaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kamarkos = KamarKos::find($request->kamarkos);
+        $penyewaan = new Penyewaan();
+        $penyewaan->user_id = $request->penyewa;
+        $penyewaan->kamarkos_id = $request->kamarkos;
+        $penyewaan->tanggal_mulai = $request->tanggal_mulai;
+        $penyewaan->tanggal_selesai = $request->tanggal_selesai;
+        $penyewaan->durasi_sewa = $request->durasi_sewa;
+        $penyewaan->total = $request->durasi_sewa * $kamarkos->harga;
+        $penyewaan->save();
+
+        return redirect('penyewaan')->with("message", "Tambah Berhasil");
     }
 
     /**

@@ -51,52 +51,52 @@
                     </tr>
                   </thead>
                   <tbody>
-                      @forelse ($penyewaan as $item)
-                      <tr>
-                          <th scope="row">{{$loop->iteration}}</th>
-                          <td>{{ $item->no_kamar }}</td>
-                          <td>{{ $item->penyewa->name }}</td>
-                          <td>{{ $item->tanggal_mulai }}</td>
-                          <td>{{ $item->tanggal_selesai }}</td>
-                          <td>{{ $item->durasi_sewa }}</td>
-                          <td>{{ $item->confirmed }}</td>
-                          <td> @currency($item->total) </td>
-                          <td>
-                              <a href="/penyewaan/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
-                              <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}">
+                    @forelse ($penyewaan as $item)
+                        <tr>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{ $item->no_kamar }}</td>
+                            <td>{{ $item->penyewa->name }}</td>
+                            <td>{{ $item->tanggal_mulai }}</td>
+                            <td>{{ $item->tanggal_selesai }}</td>
+                            <td>{{ $item->durasi_sewa }}</td>
+                            <td>{{ $item->confirmed }}</td>
+                            <td> {{ $item->total }} </td>
+                            <td>
+                                <a href="/penyewaan/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}">
                                 Hapus
-                              </button>
-                              {{-- Modal --}}
-                              <div class="modal fade" id="modal-delete-{{ $item->id }}">
+                                </button>
+                                {{-- Modal --}}
+                                <div class="modal fade" id="modal-delete-{{ $item->id }}">
                                 <div class="modal-dialog">
-                                  <div class="modal-content">
+                                    <div class="modal-content">
                                     <div class="modal-header">
-                                      <h4 class="modal-title">Peringatan</h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <h4 class="modal-title">Peringatan</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
-                                      </button>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                      <p>Apakah anda yakin ingin menghapus data Kamar <strong>{{ $item->no_kamar }}</strong> </p>
+                                        <p>Apakah anda yakin ingin menghapus data Kamar <strong>{{ $item->no_kamar }}</strong> </p>
                                     </div>
                                     <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                      <form action="/penyewaan/{{ $item->id }}" method="POST">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                        <form action="/penyewaan/{{ $item->id }}" method="POST">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Hapus</button>
-                                      </form>
+                                        </form>
                                     </div>
-                                  </div>
-                                  <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-content -->
                                 </div>
                                 <!-- /.modal-dialog -->
-                              </div>
-                          </td>
+                                </div>
+                            </td>
                         </tr>
-                      @empty
-                          No
-                      @endforelse
+                    @empty
+                        No
+                    @endforelse
                     
                   </tbody>
                 </table>

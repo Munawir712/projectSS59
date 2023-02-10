@@ -58,9 +58,8 @@
                             <td>{{ $item->penyewa->name }}</td>
                             <td>{{ $item->tanggal_mulai }}</td>
                             <td>{{ $item->tanggal_selesai }}</td>
-                            <td>{{ $item->durasi_sewa }}</td>
-                            <td>{{ $item->confirmed }}</td>
-                            <td> {{ $item->total }} </td>
+                            <td>Rp. {{ number_format($item->total, 0, '', '.') }}</td>
+                            <td>{{ $item->confirmed == 0 ? "Belum Dikonfirmasi" : "Sudah Dikonfirmasi" }}</td>
                             <td>
                                 <a href="/penyewaan/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}">

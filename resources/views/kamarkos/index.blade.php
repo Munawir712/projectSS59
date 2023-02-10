@@ -55,7 +55,7 @@
                           <td>{{ $item->no_kamar }}</td>
                           <td>{{ $item->name }}</td>
                           <td>{{ $item->tipe }}</td>
-                          <td>{{ $item->harga }}</td>
+                          <td> @currency($item->harga) </td>
                           <td>
                               <a href="/kamarkos/{{ $item->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                               <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}">

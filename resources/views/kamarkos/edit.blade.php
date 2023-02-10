@@ -54,7 +54,7 @@
                     <select class="form-control select2" name="tipe_kamar" style="width: 100%;">
                         <option value="">-- Pilih Tipe --</option>
                         @foreach ($tipe_kamar as $item)
-                            <option value="{{ $item }}" @selected(old('tipe_kamar') ?? $kamarkos->tipe)>{{ $item }}</option>
+                            <option value="{{ $item }}" @selected(old('tipe_kamar') ?? $kamarkos->tipe == $item)>{{ $item }}</option>
                         @endforeach
                     </select>
                   </div>

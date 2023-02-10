@@ -68,7 +68,12 @@ class KamarkosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
+        $kamarkos = KamarKos::find($id);
+        return view('kamarkos.edit', [
+            'kamarkos' => $kamarkos,
+            'tipe_kamar'=> $tipe_kamar,
+        ]);
     }
 
     /**
@@ -80,7 +85,16 @@ class KamarkosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kamarkos = KamarKos::find($id);
+        $kamarkos->no_kamar = $request->no_kamar;
+        $kamarkos->name = $request->name;
+        $kamarkos->tipe = $request->tipe_kamar;
+        $kamarkos->harga = $request->harga;
+        $kamarkos->picturePath = "default.png";
+        $kamarkos->save();
+
+        return redirect('kamarkos')->with('message', 'Data Kamar kos diubah');
+
     }
 
     /**

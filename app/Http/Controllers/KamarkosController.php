@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KamarKos;
+use App\Models\Kosan;
 use Illuminate\Http\Request;
 
 class KamarkosController extends Controller
@@ -14,8 +15,8 @@ class KamarkosController extends Controller
      */
     public function index()
     {
-        return view('kamarkos.index',[
-            "kamarkos" => KamarKos::all(),
+        return view('kamarkos.index', [
+            "kamarkos" => Kosan::with(['facilities', 'kosanImage'])->get(),
         ]);
     }
 
@@ -26,8 +27,9 @@ class KamarkosController extends Controller
      */
     public function create()
     {
-        $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
-        return view('kamarkos.create', ['tipe_kamar' => $tipe_kamar]);
+        // $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
+        $category = ["minimalis", "reguler", "premium"];
+        return view('kamarkos.create', ['category' => $category]);
     }
 
     /**
@@ -38,15 +40,17 @@ class KamarkosController extends Controller
      */
     public function store(Request $request)
     {
-        $kamarkos = new KamarKos;
-        $kamarkos->no_kamar = $request->no_kamar;
-        $kamarkos->name = $request->name;
-        $kamarkos->tipe = $request->tipe_kamar;
-        $kamarkos->harga = $request->harga;
-        $kamarkos->picturePath = "default.png";
-        $kamarkos->save();
+        $kosan = new kosan;
+        $kosan->no_kamar = $request->no_kamar;
+        $kosan->name = $request->name;
+        $kosan->category = $request->category;
+        $kosan->alamat = $request->alamat;
+        $kosan->harga = $request->harga;
+        $kosan->gender_category = $request->gender_category;
+        $kosan->max_orang = $request->max_orang;
+        $kosan->save();
 
-        return redirect('kamarkos')->with('message', 'Data Kamar kos ditambahkan');
+        return redirect('kosan')->with('message', 'Data Kamar kos ditambahkan');
     }
 
     /**
@@ -68,11 +72,12 @@ class KamarkosController extends Controller
      */
     public function edit($id)
     {
-        $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
-        $kamarkos = KamarKos::find($id);
+        // $tipe_kamar = ["Biasa", "Menengah", "Lengkap"];
+        $category = ["minimalis", "reguler", "premium"];
+        $kosan = Kosan::find($id);
         return view('kamarkos.edit', [
-            'kamarkos' => $kamarkos,
-            'tipe_kamar'=> $tipe_kamar,
+            'kamarkos' => $kosan,
+            'category' => $category,
         ]);
     }
 
@@ -85,16 +90,16 @@ class KamarkosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kamarkos = KamarKos::find($id);
-        $kamarkos->no_kamar = $request->no_kamar;
-        $kamarkos->name = $request->name;
-        $kamarkos->tipe = $request->tipe_kamar;
-        $kamarkos->harga = $request->harga;
-        $kamarkos->picturePath = "default.png";
-        $kamarkos->save();
+        $kosan = Kosan::find($id);
+        $kosan->no_kamar = $request->no_kamar;
+        $kosan->name = $request->name;
+        $kosan->category = $request->category;
+        $kosan->gender_category = $request->gender_category;
+        $kosan->harga = $request->harga;
+        $kosan->max_orang = $request->max_orang;
+        $kosan->save();
 
-        return redirect('kamarkos')->with('message', 'Data Kamar kos diubah');
-
+        return redirect('kosan')->with('message', 'Data Kamar kos diubah');
     }
 
     /**
@@ -105,7 +110,7 @@ class KamarkosController extends Controller
      */
     public function destroy($id)
     {
-        KamarKos::destroy($id);
-        return redirect('kamarkos')->with('message', 'Data Kamar kos telah dihapus');
+        Kosan::destroy($id);
+        return redirect('kosan')->with('message', 'Data Kamar kos telah dihapus');
     }
 }

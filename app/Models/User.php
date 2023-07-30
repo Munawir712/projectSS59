@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'phone_number',
+        'jenis_kelamin',
+        'roles',
     ];
 
     /**
@@ -42,8 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function penyewaan()
+    public function penyewa()
     {
-        return $this->belongsTo(Penyewaan::class);
+        return $this->belongsTo(Penyewa::class, 'id', 'user_id');
     }
 }

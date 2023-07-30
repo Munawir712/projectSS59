@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\KosanController;
+use App\Http\Controllers\API\PenyewaanController;
+use App\Http\Controllers\API\PenyewaController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::post('kosan/create', [KosanController::class, 'create']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user', [UserController::class, 'fetch']);
+    Route::post('logout', [UserController::class, 'logout']);
+
+    Route::get('penyewa', [PenyewaController::class, 'fetch']);
+    Route::post('penyewa/create', [PenyewaController::class, 'create']);
+
+    Route::get('penyewaan', [PenyewaanController::class, 'all']);
+    Route::post('penyewaan/checkout', [PenyewaanController::class, 'checkout']);
+    Route::post('penyewaan/cancel', [PenyewaanController::class, 'cancelPenyewaan']);
+    Route::post('penyewaan/{id}', [PenyewaanController::class, 'update']);
+    Route::get('penyewaan/cektagihan/{id}', [PenyewaanController::class, 'cekTagihan']);
+});
+
+
+Route::post('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+
+Route::get('kosan', [KosanController::class, 'all']);

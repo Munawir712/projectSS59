@@ -6,7 +6,7 @@ use App\Models\Penyewa;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PenyewaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,9 @@ class PenyewaController extends Controller
      */
     public function index()
     {
-        $penyewa = Penyewa::all();
-        return view("penyewa.index", ['penyewa' => $penyewa]);
+        return view('users.index', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -26,7 +27,7 @@ class PenyewaController extends Controller
      */
     public function create()
     {
-        return view("penyewa.create");
+        return view('users.create');
     }
 
     /**
@@ -37,16 +38,7 @@ class PenyewaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $penyewa = new Penyewa();
-        $penyewa->name = $request->name;
-        $penyewa->email = $request->email;
-        $penyewa->phone_number = $request->phoneNumber;
-        $penyewa->jenis_kelamin = $request->jenis_kelamin;
-        $penyewa->foto_ktp = "";
-        $penyewa->save();
-
-        return redirect('penyewa')->with("message", "Tambah Berhasil");
+        //
     }
 
     /**
@@ -68,9 +60,7 @@ class PenyewaController extends Controller
      */
     public function edit($id)
     {
-        return view('penyewa.edit', [
-            'penyewa' => Penyewa::find($id),
-        ]);
+        //
     }
 
     /**
@@ -82,16 +72,7 @@ class PenyewaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd("Ayook");
-        $penyewa = Penyewa::find($id);
-        $penyewa->name = $request->name;
-        $penyewa->email = $request->email;
-        $penyewa->phone_number = $request->phoneNumber;
-        $penyewa->jenis_kelamin = $request->jenis_kelamin;
-        $penyewa->foto_ktp = "";
-        $penyewa->save();
-
-        return redirect('penyewa')->with("message", "Data Berhasil diUbah");
+        //
     }
 
     /**
@@ -100,10 +81,10 @@ class PenyewaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penyewa $penyewa)
+    public function destroy($id)
     {
-        $penyewa->delete();
-        User::where('id', $penyewa->user_id)->delete();
-        return redirect('penyewa')->with("message", "Data penyewa sudah dihapus");
+        User::destroy($id);
+        Penyewa::where('user_id', $id)->delete();
+        return redirect('users')->with("message", "Data penyewa sudah dihapus");
     }
 }

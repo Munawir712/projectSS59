@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('penyewaans', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('kamarkos_id');
+            $table->integer('penyewa_id');
+            $table->integer('kosan_id');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->integer('durasi_sewa');
+            $table->integer('jumlah_orang');
+            $table->enum('status', ['belum_dikonfirmasi', 'menunggu_pembayaran',  'dikonfirmasi', 'sedang_disewa', 'selesai', 'dibatalkan', 'belum_bayar', 'dalam_proses'])->default('belum_dikonfirmasi');
             $table->boolean('confirmed')->default(false);
             $table->integer('total');
 

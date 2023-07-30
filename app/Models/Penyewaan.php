@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,14 +12,23 @@ class Penyewaan extends Model
 
     protected $guarded = ['id'];
 
-    public function penyewa() 
+    public function penyewa()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(Penyewa::class, 'id', 'penyewa_id');
     }
 
-    public function kamarkos()
+    public function kosan()
     {
-        return $this->hasOne(KamarKos::class, 'id', 'kamarkos_id');
+        return $this->hasOne(Kosan::class, 'id', 'kosan_id');
     }
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->timestamp;
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->timestamp;
+    }
 }

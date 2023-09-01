@@ -112,7 +112,9 @@ class FacilityController extends Controller
 
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Facility::class, 'slug', $request->name);
+        $slug = SlugService::createSlug(Facility::class, 'slug', $request->name, [
+            'separator' => '_'
+        ]);
 
         return response()->json(['slug' => $slug]);
     }

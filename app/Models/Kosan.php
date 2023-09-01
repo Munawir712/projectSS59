@@ -15,10 +15,15 @@ class Kosan extends Model
         'no_kamar',
         'name',
         'alamat',
-        'jenis',
-        'kategori_jk',
-        'harga_bulanan',
+        'tipe',
+        'gender_category',
+        'category',
+        'harga',
         'max_orang',
+        'jumlah_kos',
+        'latitude',
+        'longitude',
+        'description',
     ];
 
     public function kosanImage()
@@ -29,5 +34,10 @@ class Kosan extends Model
     public function facilities()
     {
         return $this->belongsToMany(Facility::class, 'kosan_facilities', 'kosan_id', 'facility_id');
+    }
+
+    public function penyewaan()
+    {
+        return $this->hasMany(Penyewaan::class, 'kosan_id');
     }
 }

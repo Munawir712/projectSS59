@@ -50,22 +50,21 @@ class PenyewaanController extends Controller
                     'message' => 'Kos tidak tersedia',
                     'errors' => $validator->errors()
                 ], 404);
-                // return ResponseFormatter::error(["errors" => 'Kosan tidak tersedia'], 'Transaksi penyewaan gagal karena kosan sudah tidak tersedia', 422);
             }
 
             // check penyewaan yg masih berlaku
             $cekPenyewaan = Penyewaan::latest()->where('penyewa_id', $request->user()->id)->first();
-            $date_keluar = date('Y-m-d', strtotime($request->tanggal_mulai . ' + ' . $request->durasi_sewa . ' months'));
-            if ($cekPenyewaan && $cekPenyewaan->status == 'sedang_disewa') {
-                $alreadyHaveSewa = strtotime($request->tanggal_mulai) < strtotime($cekPenyewaan->tanggal_selesai);
-                if ($alreadyHaveSewa) {
-                    return response()->json([
-                        'message' => 'Anda masih memiliki kos yg sedang disewa',
-                        'errors' => $validator->errors()
-                    ], 422);
-                    // return ResponseFormatter::error(["errors" => 'masih memiliki kos yg disewa'], 'Masih memiliki kos yg lagi disewa');
-                }
-            }
+            // dd($cekPenyewaan);
+            $date_keluar = date('Y-m-d', strtotime($request->tanggal_mulai . ' + ' . $request->durasi_sewa . ' months') - 1);
+            // if ($cekPenyewaan && $cekPenyewaan->status == 'sedang_disewa') {
+            //     $alreadyHaveSewa = strtotime($request->tanggal_mulai) < strtotime($cekPenyewaan->tanggal_selesai);
+            //     if ($alreadyHaveSewa) {
+            //         return response()->json([
+            //             'message' => 'Anda masih memiliki kos yg sedang disewa',
+            //             'errors' => $validator->errors()
+            //         ], 422);
+            //     }
+            // }
 
             // $kosan = Kosan::find((int)$request->kosan_id);
             // $kosan->status = "disewa";

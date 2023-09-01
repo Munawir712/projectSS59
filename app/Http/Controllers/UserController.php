@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index', [
-            'users' => User::all(),
+            'users' => User::where('roles', '=', 'USER')->get(),
         ]);
     }
 
@@ -38,7 +38,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->username;
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->phone_number = $request->phoneNumber;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        if ($request->hasFile('foto_ktp')) {
+            $user->foto_ktp = 'storage/' . $request->file('foto_ktp')->store('user', 'public');
+        }
+        $user->save();
+
+        return redirect('users')->with("message", "Tambah User Berhasil");
     }
 
     /**
@@ -60,7 +72,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('users.edit', ['user' => User::find($id)]);
     }
 
     /**
@@ -70,9 +82,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->all();
+        if ($request->hasFile('foto_ktp')) {
+            $data['foto_ktp'] = 'storage/' . $request->file('foto_ktp')->store('user', 'public');
+        }
+        $user->update($data);
+        // $user = User::find($id);
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->phone_number = $request->phoneNumber;
+        // $user->jenis_kelamin = $request->jenis_kelamin;
+        // if ($request->hasFile('foto_ktp')) {
+        //     $user->foto_ktp = 'storage/' . $request->file('foto_ktp')->store('user', 'public');
+        // }
+        // $user->save();
+
+        return redirect('users')->with("message", "Data Berhasil diUbah");
     }
 
     /**
@@ -85,6 +112,6 @@ class UserController extends Controller
     {
         User::destroy($id);
         Penyewa::where('user_id', $id)->delete();
-        return redirect('users')->with("message", "Data penyewa sudah dihapus");
+        return redirect('users')->with("message", "Data User berhasil dihapus");
     }
 }

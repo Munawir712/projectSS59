@@ -20,20 +20,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('layouts.master');
+// })->middleware('auth');
 
 Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('users', UserController::class);
     // Route::get('/penyewa', [PenyewaController::class, 'index'])->name('penyewa');
     Route::resource('penyewa', PenyewaController::class);
     Route::resource('kosan', KamarkosController::class);
     Route::get('/facility/checkSlug', [FacilityController::class, 'checkSlug']);
     Route::resource('facility', FacilityController::class);
+    Route::get('/penyewaan/ajuan', [PenyewaanController::class, 'pengajuanPenyewaan']);
+    Route::get('penyewaan/{id}/status/{status}', [PenyewaanController::class, 'changeStatus'])->name('penyewaan.changeStatus');
     Route::resource('penyewaan', PenyewaanController::class);
 });

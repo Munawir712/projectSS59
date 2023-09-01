@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Facility;
 use App\Models\Kosan;
 use App\Models\KosanImage;
+use App\Models\Penyewaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,13 +22,14 @@ class KosanController extends Controller
         $category = $request->input('category');
         $gender_category = $request->input('gender_category');
         $alamat = $request->input('alamat');
+        $status = $request->input('status');
 
         if ($id) {
-            $kosan = Kosan::find($id);
+            $kosan = Kosan::with('kosanImage', 'facilities')->where('id', '=', $id)->first();
             if ($kosan) {
                 return response()->json([
-                    'message' => 'Data kos berhasil diambil',
-                    'data' => $kosan->with('kosanImage', 'facilities')->get(),
+                    'message' => 'Data kos single berhasil diambil',
+                    'data' => $kosan,
                 ]);
             } else {
                 return response()->json([
@@ -59,11 +61,20 @@ class KosanController extends Controller
             $kosan->where('gender_category', 'like', '%' . $gender_category . '%');
         }
 
-        $kosan->where('status', '=', 'tersedia');
+        if ($status) {
+            $kosan->where('status', '=', $status);
+        }
+
+        $kosans = $kosan->with('kosanImage', 'facilities')->get();
+        for ($i = 0; $i < $kosans->count(); $i++) {
+            $penyewaans = Penyewaan::where('kosan_id', '=', $kosans[$i]->id)->where('status', '=', 'sedang_disewa');
+            $kosans[$i]['jumlah_disewa'] = $penyewaans->count();
+            $kosans[$i]['sisa_kos'] = $kosans[$i]->jumlah_kos - $penyewaans->count();
+        }
 
         return response()->json([
             'message' => 'Data kosan berhasil diambil',
-            'data' => $kosan->with('kosanImage', 'facilities')->paginate($limit),
+            'data' => $kosans->where('sisa_kos', '>', 0)->values(),
         ], 200);
     }
 

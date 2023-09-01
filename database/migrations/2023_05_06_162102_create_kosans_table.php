@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('no_kamar');
             $table->string('name');
             $table->string('alamat');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->string('category');
             $table->integer('max_orang');
+            $table->integer('jumlah_kos');
             $table->string('tipe')->default('KAMAR');
             $table->string('gender_category');
             $table->text('description')->nullable();

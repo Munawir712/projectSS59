@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // require_once app_path('Helpers\Helpers.php');
     }
 
     /**
@@ -25,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('currency', function ($expression) {
-            return "Rp. " . number_format($expression, 0,',', '.');
+            return "Rp. " . number_format(floatval($expression), 0, ',', '.');
         });
     }
 }

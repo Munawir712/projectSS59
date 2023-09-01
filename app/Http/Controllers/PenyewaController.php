@@ -40,10 +40,12 @@ class PenyewaController extends Controller
         // dd($request->all());
         $penyewa = new Penyewa();
         $penyewa->name = $request->name;
-        $penyewa->email = $request->email;
+        $penyewa->email = $request->username . "@gmail.com";
         $penyewa->phone_number = $request->phoneNumber;
         $penyewa->jenis_kelamin = $request->jenis_kelamin;
-        $penyewa->foto_ktp = "";
+        if ($request->hasFile('foto_ktp')) {
+            $penyewa->foto_ktp = 'storage/' . $request->file('foto_ktp')->store('penyewa', 'public');
+        }
         $penyewa->save();
 
         return redirect('penyewa')->with("message", "Tambah Berhasil");
@@ -57,7 +59,7 @@ class PenyewaController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('penyewa.show', ['penyewa' => Penyewa::find($id)]);
     }
 
     /**
@@ -88,7 +90,9 @@ class PenyewaController extends Controller
         $penyewa->email = $request->email;
         $penyewa->phone_number = $request->phoneNumber;
         $penyewa->jenis_kelamin = $request->jenis_kelamin;
-        $penyewa->foto_ktp = "";
+        if ($request->hasFile('foto_ktp')) {
+            $penyewa->foto_ktp = 'storage/' . $request->file('foto_ktp')->store('penyewa', 'public');
+        }
         $penyewa->save();
 
         return redirect('penyewa')->with("message", "Data Berhasil diUbah");

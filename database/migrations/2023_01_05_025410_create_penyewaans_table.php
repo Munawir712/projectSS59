@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('tanggal_selesai');
             $table->integer('durasi_sewa');
             $table->integer('jumlah_orang');
-            $table->enum('status', ['belum_dikonfirmasi', 'menunggu_pembayaran',  'dikonfirmasi', 'sedang_disewa', 'selesai', 'dibatalkan', 'belum_bayar', 'dalam_proses'])->default('belum_dikonfirmasi');
+            $table->enum('status', ['belum_dikonfirmasi', 'menunggu_pembayaran',  'dikonfirmasi', 'sedang_disewa', 'selesai', 'dibatalkan', 'belum_bayar', 'dalam_proses', 'jatuh_tempo'])->default('belum_dikonfirmasi');
             $table->boolean('confirmed')->default(false);
             $table->integer('total');
 
